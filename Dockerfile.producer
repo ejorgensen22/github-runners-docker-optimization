@@ -1,0 +1,10 @@
+# syntax=docker/dockerfile:1.4
+FROM ghcr.io/${{ github.repository_owner }}/toolchain-base:latest  # In practice, replace with actual
+
+# For demo - simple Python Kafka producer
+COPY requirements.txt .
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install -r requirements.txt
+
+COPY producer.py .
+CMD ["python", "producer.py"]
